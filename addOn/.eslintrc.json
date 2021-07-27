@@ -1,0 +1,59 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "eslint-config-prettier"
+  ],
+  "plugins": ["prettier", "@typescript-eslint", "jsx-a11y"],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "rules": {
+    "semi": "off",
+    "no-use-before-define": "off",
+    "comma-dangle": "off",
+    "camelcase": "warn",
+    "prefer-object-spread": "warn",
+    "spaced-comment": "off",
+    "no-else-return": "off",
+    "no-console": "off",
+    "prettier/prettier": "warn",
+    "dot-notation": "off",
+    "explicit-module-boundary-types": "off",
+    "import/order": "off",
+    "consistent-return": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "react/jsx-boolean-value": "off",
+    "react/self-closing-comp": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "warn",
+    "import/extensions": [
+      "warn",
+      "never",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "@typescript-eslint/indent": [2, 2],
+    "@typescript-eslint/no-use-before-define": ["off"],
+
+    "react/jsx-filename-extension": [2, { "extensions": [".jsx", ".tsx"] }],
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-wrap-multilines": "off",
+    "react/jsx-curly-newline": "off",
+
+    "eslintjsx-a11y/click-events-have-key-events": "off"
+  }
+}

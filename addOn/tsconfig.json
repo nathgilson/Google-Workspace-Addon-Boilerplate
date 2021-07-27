@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "types": ["gas-types-detailed", "node"],
+    "jsx": "react",
+    "esModuleInterop": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "strict": true
+  }
+}

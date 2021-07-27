@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.cache
+.vscode/
+yarn-error.log
+.DS_Store
+.firebase 
+.well-known/
+*.log
+*.lock
