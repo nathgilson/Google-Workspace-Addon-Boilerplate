@@ -7,5 +7,5 @@ export const onOpen = (event: any): void => {
 
 export const openModal = (): void => {
   const html = HtmlService.createHtmlOutputFromFile('Modal').setWidth(900).setHeight(600)
-  SpreadsheetApp.getUi().showModalDialog(html, 'Mail Merge for Gmail 📣')
+  SpreadsheetApp.getUi().showModalDialog(html, 'Add-on Name')
 }
