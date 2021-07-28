@@ -1,15 +1,13 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React, { useState, useCallback } from 'react'
-import { useApp } from '../../contexts/context'
+import React from 'react'
+import { useApp } from '../hooks/context'
 
 export default (): React.ReactElement => {
   const {
     state: { warning },
   } = useApp()
 
-  console.log('>> Got Warning:', warning)
-
-  // PERMISSION \\
+  // PERMISSION WARNING \\
   if (
     warning?.toUpperCase().includes('PERMISSION') || // `We're sorry, a server error occurred while reading from storage. Error code PERMISSION_DENIED.` // `You do not have permission to access the requested document.`
     warning?.toUpperCase().includes('AUTHORIZATION') || // `Authorization is required to perform that action.`
@@ -18,7 +16,7 @@ export default (): React.ReactElement => {
     warning?.includes('autorización') // "Se requiere autorización para realizar esa acción."
   ) {
     return (
-      <div className='h-100 d-flex flex-column justify-content-between'>
+      <div>
         <div>
           <td>
             <p>
@@ -51,7 +49,7 @@ export default (): React.ReactElement => {
 
   // UNKNOWN ERROR \\
   return (
-    <div className='h-100 d-flex flex-column justify-content-between'>
+    <div>
       <td>
         <p>
           <h4>⚠️ UNKNOWN ERROR</h4>

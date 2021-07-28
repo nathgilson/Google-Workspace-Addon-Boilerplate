@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import server from '../../server'
-import { useApp } from '../../contexts/context'
+import { useApp } from '../hooks/context'
 
-const { fetchUserData, syncTrackingEvents } = server.serverFunctions
+const { fetchUserData } = server.serverFunctions
 
 export default (): React.ReactElement => {
   const {
@@ -12,14 +12,8 @@ export default (): React.ReactElement => {
 
   // Initialize app
   useEffect(() => {
-    // Fetch both database and sheet data
-    const userDataPromise = fetchUserData()
-
-    // Update tracking columns in sheet
-    syncTrackingEvents()
-
-    Promise.all([userDataPromise])
-      .then(([userData]) => {
+    fetchUserData()
+      .then((userData: any) => {
         dispatch({
           type: 'INITIALIZE_APP',
           payload: {
@@ -27,7 +21,7 @@ export default (): React.ReactElement => {
           },
         })
       })
-      .catch((error) => {
+      .catch((error: any) => {
         console.error('>> App.tsx > useEffect:', error.message)
         return dispatch({
           type: 'SET_WARNING',

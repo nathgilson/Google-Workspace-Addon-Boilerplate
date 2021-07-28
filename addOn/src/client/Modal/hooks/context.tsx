@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer } from 'react'
-import { logEvent, logPageview } from '../analytics'
+import { logEvent, logPageview } from '../../analytics'
 import { AppDispatch, appStateReducer } from './reducers'
-import { AppState, GAEvent } from '../../types'
+import { AppState, GAEvent } from '../../../types'
 
 interface AppContext {
   state: AppState
@@ -13,9 +13,7 @@ interface AppContext {
 }
 
 const initialAppState: AppState = {
-  user: {
-    userEmail: '',
-  },
+  user: { userEmail: '' },
   spreadsheetId: null,
   warning: null,
 }

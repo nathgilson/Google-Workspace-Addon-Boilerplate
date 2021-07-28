@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { Dispatch, Reducer } from 'react'
 import { produce } from 'immer'
-import { AppState } from '../../types'
+import { AppState } from '../../../types'
 
 export type ActionType<Action, Payload = void> = Payload extends void
   ? { type: Action }
@@ -17,10 +17,7 @@ export const appStateReducer: Reducer<AppState, AppActions> = produce(
   (draft: AppState, action: AppActions) => {
     switch (action.type) {
       case 'INITIALIZE_APP': {
-        const {
-          userData: { user },
-        } = action.payload
-        draft.user = user
+        draft.user = action.payload.userData
         break
       }
       case 'SET_WARNING': {

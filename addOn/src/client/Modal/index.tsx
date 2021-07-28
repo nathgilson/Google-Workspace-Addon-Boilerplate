@@ -1,9 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-// import Modal from './components'
 import App from './components/App'
-import { AppStateProvider } from '../contexts/context'
+import { AppStateProvider } from './hooks/context'
 import 'bootstrap/dist/css/bootstrap.css'
 import './styles.css'
 

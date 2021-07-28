@@ -22,22 +22,7 @@ export const fetchUserData = (): any => {
   // IF DOESNT EXIST => CREATE NEW USER IN DB
   const newUserObject = {
     userEmail: getUserEmail(),
-    domain,
     createdAt: timestamp,
-    isBrandingRemoved: false,
-    trackingIsActivated: false,
-    status: 'trialing',
-    templates: {
-      default: {
-        advancedContent: config.defaultAdvancedContent,
-        content: config.defaultContent,
-        createdAt: timestamp,
-        editedOn: timestamp,
-        id: 'default',
-        name: 'My first template',
-        subject: 'I found a mail merge tool for Gmail',
-      },
-    },
   }
   firestore.createDocument(`users/${getUserEmail()}`, newUserObject)
   Utilities.sleep(1000)
