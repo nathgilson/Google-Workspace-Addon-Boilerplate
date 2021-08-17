@@ -30,10 +30,5 @@ export default (): React.ReactElement => {
       })
   }, [dispatch])
 
-  return (
-    <div>
-      hello
-      {/* user: {user?.userEmail} */}
-    </div>
-  )
+  return <div>hello user: {user?.userEmail}</div>
 }

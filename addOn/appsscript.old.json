@@ -1,19 +1,24 @@
 {
   "addOns": {
     "common": {
-      "name": "TEST ENV",
-      "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Windows_Settings_app_icon.png/1024px-Windows_Settings_app_icon.png",
+      "name": "Translate",
+      "logoUrl": "https://www.gstatic.com/images/branding/product/1x/translate_24dp.png",
       "layoutProperties": {
         "primaryColor": "#2772ed"
       },
       "homepageTrigger": {
-        "runFunction": "onOpen"
+        "runFunction": "onHomepage"
       }
     },
-    "sheets": {},
-    "docs": {},
-    "slides": {},
-    "gmail": {}
+    "sheets": {
+      "homepageTrigger": {
+        "enabled": true,
+        "runFunction": "onOpen"
+      },
+      "onFileScopeGrantedTrigger": {
+        "runFunction": "onOpen"
+      }
+    }
   },
   "timeZone": "America/New_York",
   "dependencies": {
@@ -30,10 +35,6 @@
     "https://www.googleapis.com/auth/documents.currentonly",
     "https://www.googleapis.com/auth/spreadsheets.currentonly",
     "https://www.googleapis.com/auth/presentations.currentonly",
-
-    "https://www.googleapis.com/auth/gmail.addons.current.action.compose",
-    "https://www.googleapis.com/auth/gmail.addons.current.message.readonly",
-    "https://www.googleapis.com/auth/gmail.addons.execute",
 
     "https://www.googleapis.com/auth/script.container.ui",
     "https://www.googleapis.com/auth/script.external_request",
