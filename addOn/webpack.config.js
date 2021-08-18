@@ -1,17 +1,17 @@
 /*********************************
  *    import webpack plugins
  ********************************/
-const path = require('path')
-const fs = require('fs')
-const webpack = require('webpack')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const GasPlugin = require('gas-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
+const path = require("path")
+const fs = require("fs")
+const webpack = require("webpack")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
+const GasPlugin = require("gas-webpack-plugin")
+const TerserPlugin = require("terser-webpack-plugin")
 
 /*********************************
  *    set up environment variables
  ********************************/
-const dotenv = require('dotenv').config()
+const dotenv = require("dotenv").config()
 
 const parsed = dotenv.error ? {} : dotenv.parsed
 const envVars = parsed || {}
@@ -19,24 +19,24 @@ const PORT = envVars.PORT || 3000
 envVars.NODE_ENV = process.env.NODE_ENV
 envVars.PORT = PORT
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NODE_ENV === "production"
 
 /*********************************
  *    define entrypoints
  ********************************/
 // our destination directory
-const destination = path.resolve(__dirname, 'dist')
+const destination = path.resolve(__dirname, "dist")
 
 // define server paths
-const serverEntry = './src/server/index.ts'
+const serverEntry = "./src/app/index.ts"
 
 // define appsscript.json file path
-const copyAppscriptEntry = './appsscript.json'
+const copyAppscriptEntry = "./appsscript.json"
 
 // define certificate locations
 // see "npm run setup:https" script in package.json
-const keyPath = path.resolve(__dirname, './certs/key.pem')
-const certPath = path.resolve(__dirname, './certs/cert.pem')
+const keyPath = path.resolve(__dirname, "./certs/key.pem")
+const certPath = path.resolve(__dirname, "./certs/cert.pem")
 
 /*********************************
  *    Declare settings
@@ -44,30 +44,30 @@ const certPath = path.resolve(__dirname, './certs/cert.pem')
 
 // webpack settings for copying files to the destination folder
 const copyFilesConfig = {
-  name: 'COPY FILES - appsscript.json',
-  mode: 'production', // unnecessary for this config, but removes console warning
+  name: "COPY FILES - appsscript.json",
+  mode: "production", // unnecessary for this config, but removes console warning
   entry: copyAppscriptEntry,
   output: {
-    path: destination,
+    path: destination
   },
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
         {
           from: copyAppscriptEntry,
-          to: destination,
-        },
-      ],
-    }),
-  ],
+          to: destination
+        }
+      ]
+    })
+  ]
 }
 
 // webpack settings used by both client and server
 const sharedClientAndServerConfig = {
-  context: __dirname,
+  context: __dirname
 }
 
-const gasWebpackDevServerPath = require.resolve('google-apps-script-webpack-dev-server')
+const gasWebpackDevServerPath = require.resolve("google-apps-script-webpack-dev-server")
 
 // webpack settings for devServer https://webpack.js.org/configuration/dev-server/
 const devServer = {
@@ -76,36 +76,36 @@ const devServer = {
   // run our own route to serve the package google-apps-script-webpack-dev-server
   before: (app) => {
     // this '/gas/' path needs to match the path loaded in the iframe in dev/index.js
-    app.get('/gas/*', (req, res) => {
-      res.setHeader('Content-Type', 'text/html')
+    app.get("/gas/*", (req, res) => {
+      res.setHeader("Content-Type", "text/html")
       fs.createReadStream(gasWebpackDevServerPath).pipe(res)
     })
-  },
+  }
 }
 
 if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
   // use key and cert settings only if they are found
   devServer.https = {
     key: fs.readFileSync(keyPath),
-    cert: fs.readFileSync(certPath),
+    cert: fs.readFileSync(certPath)
   }
 }
 
 // webpack settings used by the server-side code
 const serverConfig = {
   ...sharedClientAndServerConfig,
-  name: 'SERVER',
+  name: "SERVER",
   // server config can't use 'development' mode
   // https://github.com/fossamagna/gas-webpack-plugin/issues/135
-  mode: isProd ? 'production' : 'none',
+  mode: isProd ? "production" : "none",
   entry: serverEntry,
   output: {
-    filename: 'code.js',
+    filename: "code.js",
     path: destination,
-    libraryTarget: 'this',
+    libraryTarget: "this"
   },
   resolve: {
-    extensions: ['.ts', '.js', '.json'],
+    extensions: [".ts", ".js", ".json"]
   },
   module: {
     rules: [
@@ -115,21 +115,21 @@ const serverConfig = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
+            loader: "babel-loader"
           },
           {
-            loader: 'ts-loader',
-          },
-        ],
+            loader: "ts-loader"
+          }
+        ]
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-        },
-      },
-    ],
+          loader: "babel-loader"
+        }
+      }
+    ]
   },
   optimization: {
     minimize: true,
@@ -143,24 +143,24 @@ const serverConfig = {
           warnings: false,
           parse: {},
           compress: {
-            properties: false,
+            properties: false
           },
           mangle: false,
           module: false,
           output: {
-            beautify: true,
-          },
-        },
-      }),
-    ],
+            beautify: true
+          }
+        }
+      })
+    ]
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify(envVars),
-      'process.env.NODE_ENV': JSON.stringify(isProd ? 'production' : 'development'),
+      "process.env": JSON.stringify(envVars),
+      "process.env.NODE_ENV": JSON.stringify(isProd ? "production" : "development")
     }),
-    new GasPlugin(),
-  ],
+    new GasPlugin()
+  ]
 }
 
 module.exports = [
@@ -169,5 +169,5 @@ module.exports = [
   // Note: devServer settings are only read in the first element when module.exports is an array
   { ...copyFilesConfig, ...(isProd ? {} : { devServer }) },
   // 3. Create the server bundle
-  serverConfig,
+  serverConfig
 ]
