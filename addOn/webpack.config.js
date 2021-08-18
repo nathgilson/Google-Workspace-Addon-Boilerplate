@@ -7,10 +7,6 @@ const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const GasPlugin = require('gas-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
-const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin')
-const moduleToCdn = require('module-to-cdn')
 
 /*********************************
  *    set up environment variables
@@ -36,19 +32,6 @@ const serverEntry = './src/server/index.ts'
 
 // define appsscript.json file path
 const copyAppscriptEntry = './appsscript.json'
-
-// define live development dialog paths
-const devDialogEntry = './dev/index.js'
-
-// define client entry points and output names
-const clientEntrypoints = [
-  {
-    name: 'Modal',
-    entry: './src/client/Modal/index.tsx',
-    filename: 'Modal',
-    template: './src/client/Modal/index.html',
-  },
-]
 
 // define certificate locations
 // see "npm run setup:https" script in package.json
@@ -84,107 +67,6 @@ const sharedClientAndServerConfig = {
   context: __dirname,
 }
 
-// webpack settings used by all client entrypoints
-const clientConfig = {
-  ...sharedClientAndServerConfig,
-  mode: isProd ? 'production' : 'development',
-  output: {
-    path: destination,
-    // this file will get added to the html template inline
-    // and should be put in .claspignore so it is not pushed
-    filename: 'main.js',
-  },
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
-  },
-  module: {
-    rules: [
-      // typescript config
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-          },
-          {
-            loader: 'ts-loader',
-          },
-        ],
-      },
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
-      // we could add support for scss here
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
-  },
-}
-
-// DynamicCdnWebpackPlugin settings
-// these settings help us load 'react', 'react-dom' and the packages defined below from a CDN
-const DynamicCdnWebpackPluginConfig = {
-  // set "verbose" to true to print console logs on CDN usage while webpack builds
-  verbose: false,
-  resolver: (packageName, packageVersion, options) => {
-    const packageSuffix = isProd ? '.min.js' : '.js'
-    const moduleDetails = moduleToCdn(packageName, packageVersion, options)
-    if (moduleDetails) {
-      return moduleDetails
-    }
-    // "name" should match the package being imported
-    // "var" is important to get right -- this should be the exposed global. Look up "webpack externals" for info.
-    switch (packageName) {
-      case 'react-transition-group':
-        return {
-          name: packageName,
-          var: 'ReactTransitionGroup',
-          version: packageVersion,
-          url: `https://unpkg.com/react-transition-group@${packageVersion}/dist/react-transition-group${packageSuffix}`,
-        }
-      case 'react-bootstrap':
-        return {
-          name: packageName,
-          var: 'ReactBootstrap',
-          version: packageVersion,
-          url: `https://unpkg.com/react-bootstrap@${packageVersion}/dist/react-bootstrap${packageSuffix}`,
-        }
-      default:
-        return null
-    }
-  },
-}
-
-// webpack settings used by each client entrypoint defined at top
-const clientConfigs = clientEntrypoints.map((clientEntrypoint) => {
-  return {
-    ...clientConfig,
-    name: clientEntrypoint.name,
-    entry: clientEntrypoint.entry,
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env': JSON.stringify(envVars),
-      }),
-      new HtmlWebpackPlugin({
-        template: clientEntrypoint.template,
-        filename: `${clientEntrypoint.filename}${isProd ? '' : '-impl'}.html`,
-        inlineSource: '^[^(//)]+.(js|css)$', // embed all js and css inline, exclude packages with '//' for dynamic cdn insertion
-      }),
-      // add the generated js code to the html file inline
-      new HtmlWebpackInlineSourcePlugin(),
-      // this plugin allows us to add dynamically load packages from a CDN
-      new DynamicCdnWebpackPlugin(DynamicCdnWebpackPluginConfig),
-    ],
-  }
-})
-
 const gasWebpackDevServerPath = require.resolve('google-apps-script-webpack-dev-server')
 
 // webpack settings for devServer https://webpack.js.org/configuration/dev-server/
@@ -208,29 +90,6 @@ if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
     cert: fs.readFileSync(certPath),
   }
 }
-
-// webpack settings for the development client wrapper
-const devClientConfigs = clientEntrypoints.map((clientEntrypoint) => {
-  envVars.FILENAME = clientEntrypoint.filename
-  return {
-    ...clientConfig,
-    name: `DEVELOPMENT: ${clientEntrypoint.name}`,
-    entry: devDialogEntry,
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env': JSON.stringify(envVars),
-      }),
-      new HtmlWebpackPlugin({
-        template: './dev/index.html',
-        // this should match the html files we load in src/server/ui.js
-        filename: `${clientEntrypoint.filename}.html`,
-        inlineSource: '^[^(//)]+.(js|css)$', // embed all js and css inline, exclude packages with '//' for dynamic cdn insertion
-      }),
-      new HtmlWebpackInlineSourcePlugin(),
-      new DynamicCdnWebpackPlugin({}),
-    ],
-  }
-})
 
 // webpack settings used by the server-side code
 const serverConfig = {
@@ -311,8 +170,4 @@ module.exports = [
   { ...copyFilesConfig, ...(isProd ? {} : { devServer }) },
   // 3. Create the server bundle
   serverConfig,
-  // 4. Create one client bundle for each client entrypoint.
-  ...clientConfigs,
-  // 5. Create a development dialog bundle for each client entrypoint during development.
-  ...(isProd ? [] : devClientConfigs),
 ]

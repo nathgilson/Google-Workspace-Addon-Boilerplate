@@ -3,8 +3,3 @@ export interface AppState {
   spreadsheetId: string | null
   warning: string | null
 }
-export interface GAEvent {
-  category: string
-  action: string
-  label?: string
-}

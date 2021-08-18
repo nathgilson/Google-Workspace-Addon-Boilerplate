@@ -29,7 +29,7 @@ export const createCatCard = (text: string, isHomepage: boolean) => {
     .setFunctionName('onChangeCat')
     .setParameters({ text: text, isHomepage: isHomepage.toString() })
   var button = CardService.newTextButton()
-    .setText('Change cat')
+    .setText('Change catx')
     .setOnClickAction(action)
     .setTextButtonStyle(CardService.TextButtonStyle.FILLED)
   var buttonSet = CardService.newButtonSet().addButton(button)

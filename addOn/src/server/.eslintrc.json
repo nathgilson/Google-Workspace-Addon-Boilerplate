@@ -1,6 +1,0 @@
-{
-  "plugins": ["prettier", "@typescript-eslint", "googleappsscript"],
-  "env": {
-    "googleappsscript/googleappsscript": true
-  }
-}

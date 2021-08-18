@@ -3,11 +3,13 @@
   "parser": "@typescript-eslint/parser",
   "extends": [
     "airbnb",
+    "eslint-config-prettier",
+    "eslint:recommended",
+    "prettier",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react-hooks/recommended",
-    "eslint-config-prettier"
+    "prettier/@typescript-eslint"
   ],
-  "plugins": ["prettier", "@typescript-eslint", "jsx-a11y"],
+  "plugins": ["prettier", "@typescript-eslint", "jsx-a11y", "googleappsscript"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
@@ -16,7 +18,14 @@
       "typescript": {}
     }
   },
+
   "rules": {
+    "no-this-assignment": false,
+    "import-name": false,
+    "no-increment-decrement": false,
+    "no-implicit-dependencies": false,
+    "ordered-imports": false,
+
     "semi": "off",
     "no-use-before-define": "off",
     "comma-dangle": "off",
@@ -48,12 +57,12 @@
     ],
     "@typescript-eslint/indent": [2, 2],
     "@typescript-eslint/no-use-before-define": ["off"],
-
-    "react/jsx-filename-extension": [2, { "extensions": [".jsx", ".tsx"] }],
-    "react/jsx-one-expression-per-line": "off",
-    "react/jsx-wrap-multilines": "off",
-    "react/jsx-curly-newline": "off",
-
     "eslintjsx-a11y/click-events-have-key-events": "off"
+  },
+  "globals": {
+    "CONFIG": true
+  },
+  "env": {
+    "googleappsscript/googleappsscript": true
   }
 }
