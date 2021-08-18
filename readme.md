@@ -49,7 +49,7 @@ See [deploy](#deploy) for notes on how to deploy the project and see it live in 
 **1.** First, let's clone the repo and install the dependencies.
 
 ```bash
-git clone https://github.com/enuchi/Google-Apps-Script-Boilerplate.git
+git clone https://github.com/nathgilson/Google-App-Script-Boilerplate#the-included-sample-app
 cd Google-Apps-Script-Boilerplate
 npm install
 ```
@@ -125,9 +125,7 @@ Todo
 
 This project now supports typescript!
 
-To use, simply use a typescript extension in either the client code (.ts/.tsx) or the server code (.ts), and your typescript file will compile to the proper format.
-
-For client-side code, see [FormInput.tsx in the Bootstrap demo](./src/client/dialog-demo-bootstrap/components/FormInput.tsx) for an example file. Note that it is okay to have a mix of javascript and typescript, as seen in the Bootstrap demo.
+To use, simply use a typescript extension in the code (.ts), and your typescript file will compile to the proper format.
 
 To use typescript in server code, just change the file extension to .ts. The server-side code already utilizes type definitions for Google Apps Script APIs.
 
@@ -148,40 +146,6 @@ Important: Since Google Apps Scripts projects don't let you easily reference ext
 The included app only requires access to Google Spreadsheets and to loading dialog windows. If you make changes to the app's requirements, for instance, if you modify this project to work with Google Forms or Docs, make sure to edit the oauthScopes in the [appscript.json file](./appsscript.json).
 
 See https://developers.google.com/apps-script/manifest for information on the `appsscript.json` structure.
-
-### Calling server-side Google Apps Script functions
-
-This project uses the [gas-client](https://github.com/enuchi/gas-client) package to more easily call server-side functions using promises.
-
-```js
-// Google's documentation wants you to do this. Boo.
-google.script.run
-  .withSuccessHandler((response) => doSomething(response))
-  .withFailureHandler((err) => handleError(err))
-  .addSheet(sheetTitle)
-
-// Poof! With a little magic we can now do this:
-import Server from "gas-client"
-const { serverFunctions } = new Server()
-
-// We now have access to all our server functions, which return promises!
-serverFunctions
-  .addSheet(sheetTitle)
-  .then((response) => doSomething(response))
-  .catch((err) => handleError(err))
-
-// Or we can equally use async/await style:
-;async () => {
-  try {
-    const response = await serverFunctions.addSheet(sheetTitle)
-    doSomething(response)
-  } catch (err) {
-    handleError(err)
-  }
-}
-```
-
-In development, `gas-client` will interact with [the custom Webpack Dev Server package](https://github.com/enuchi/Google-Apps-Script-Webpack-Dev-Server) which allows us to run our app within the dialog window and still interact with Google Apps Script functions.
 
 ### Autocomplete
 
