@@ -1,11 +1,11 @@
-import * as props from './props'
-import * as ui from './ui'
-import * as db from './db'
+import * as props from "./props"
+import * as ui from "./ui"
+import * as db from "./db"
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const global: any
 
-global.onOpen = (e: any) => ui.createCatCard('good morning', true)
+// Init add-on when google app opens:
+global.onOpen = (e: any) => ui.createCatCard("good morning", true)
 
 // UI
 global.createCatCard = ui.createCatCard
