@@ -41,8 +41,6 @@
     "consistent-return": "off",
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-var-requires": "off",
-    "react/jsx-boolean-value": "off",
-    "react/self-closing-comp": "off",
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": "warn",
     "import/extensions": [
