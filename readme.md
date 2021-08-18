@@ -1,4 +1,6 @@
-<img height="200px" src="https://developers.google.com/workspace/add-ons/images/gsuite-addons-cats.png">
+<p align="center">
+<img height="400px" src="https://developers.google.com/workspace/add-ons/images/gsuite-addons-cats.png">
+</p>
 
 <p align="center"> This is your boilerplate project for developing Google Workspace add-ons inside Google Sheets, Docs, Forms and Slides projects. It's perfect for personal projects and for publishing complex add-ons in the G Workspace Marketplace.
 </p>
