@@ -1,3 +1,5 @@
+<img width="100%" src="https://developers.google.com/workspace/add-ons/images/gsuite-addons-cats.png">
+
 <p align="center"> This is your boilerplate project for developing Google Workspace add-ons inside Google Sheets, Docs, Forms and Slides projects. It's perfect for personal projects and for publishing complex add-ons in the G Workspace Marketplace.
 </p>
 
@@ -15,7 +17,6 @@
   - [Typescript](#new-typescript)
   - [Adding packages](#adding-packages)
   - [Modifying scopes](#modifying-scopes)
-  - [Calling server-side Google Apps Script functions](#calling-server-side-google-apps-script-functions)
   - [Autocomplete](#Autocomplete)
 
 <br/>
