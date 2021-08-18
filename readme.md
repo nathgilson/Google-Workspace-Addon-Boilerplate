@@ -52,8 +52,8 @@ See [deploy](#deploy) for notes on how to deploy the project and see it live in 
 **1.** First, let's clone the repo and install the dependencies.
 
 ```bash
-git clone https://github.com/nathgilson/Google-App-Script-Boilerplate#the-included-sample-app
-cd Google-Apps-Script-Boilerplate
+git clone https://github.com/nathgilson/Google-Workspace-Addon-Boilerplate
+cd Google-Workspace-Addon-Boilerplate
 npm install
 ```
 
