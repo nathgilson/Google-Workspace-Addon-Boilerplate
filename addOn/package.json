@@ -5,9 +5,8 @@
   "scripts": {
     "test": "test",
     "login": "clasp login",
-    "setup": "rm -f .clasp.json && clasp create --type sheets --title 'My Project' --rootDir ./dist",
+    "setup": "rm -f .clasp.json && clasp create --type standalone --title 'My Google Workspace Addon' --rootDir ./dist",
     "setup:use-id": "clasp setting rootDir dist && clasp setting scriptId",
-    "setup:https": "mkdir certs && mkcert -key-file ./certs/key.pem -cert-file ./certs/cert.pem localhost 127.0.0.1",
     "build:dev": "NODE_ENV=development webpack",
     "build": "NODE_ENV=production webpack",
     "deploy:dev": "rm -rf dist && npm run build:dev && npx clasp push",
