@@ -31,7 +31,6 @@
     "firebase": "^7.15.4",
     "firebase-admin": "^9.1.1",
     "firebase-functions": "^3.11.0",
-    "gmail-send": "^1.8.10",
     "googleapis": "^46.0.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",

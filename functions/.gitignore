@@ -1,9 +1,0 @@
-## Compiled JavaScript files
-index.js
-index.js.map
-
-*.log
-
-node_modules/
-
-.DS_Store
