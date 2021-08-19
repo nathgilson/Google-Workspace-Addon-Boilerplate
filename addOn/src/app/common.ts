@@ -3,33 +3,33 @@ export const createCatCard = (text: string, isHomepage?: boolean) => {
   if (!isHomepage) {
     isHomepage = false
   }
-  var now = new Date()
+  const now = new Date()
   // Replace formward slashes in the text, as they break the CataaS API.
-  var caption = text.replace(/\//g, " ")
-  var imageUrl = Utilities.formatString(
+  const caption = text.replace(/\//g, " ")
+  const imageUrl = Utilities.formatString(
     "https://cataas.com/cat/says/%s?time=%s",
     // @ts-ignore
     encodeURIComponent(caption),
     now.getTime()
   )
-  var image = CardService.newImage().setImageUrl(imageUrl).setAltText("Meow")
-  var action = CardService.newAction()
+  const image = CardService.newImage().setImageUrl(imageUrl).setAltText("Meow")
+  const action = CardService.newAction()
     .setFunctionName("onChangeCat")
     .setParameters({ text: text, isHomepage: isHomepage.toString() })
-  var button = CardService.newTextButton()
+  const button = CardService.newTextButton()
     .setText("Change cat t")
     .setOnClickAction(action)
     .setTextButtonStyle(CardService.TextButtonStyle.FILLED)
-  var buttonSet = CardService.newButtonSet().addButton(button)
-  var footer = CardService.newFixedFooter().setPrimaryButton(
+  const buttonSet = CardService.newButtonSet().addButton(button)
+  const footer = CardService.newFixedFooter().setPrimaryButton(
     CardService.newTextButton()
       .setText("Powered by cataas.com")
       .setOpenLink(CardService.newOpenLink().setUrl("https://cataas.com"))
   )
-  var section = CardService.newCardSection().addWidget(image).addWidget(buttonSet)
-  var card = CardService.newCardBuilder().addSection(section).setFixedFooter(footer)
+  const section = CardService.newCardSection().addWidget(image).addWidget(buttonSet)
+  const card = CardService.newCardBuilder().addSection(section).setFixedFooter(footer)
   if (!isHomepage) {
-    var peekHeader = CardService.newCardHeader()
+    const peekHeader = CardService.newCardHeader()
       .setTitle("Contextual Cat")
       .setImageUrl("https://www.gstatic.com/images/icons/material/system/1x/pets_black_48dp.png")
       .setSubtitle(text)
@@ -41,11 +41,11 @@ export const createCatCard = (text: string, isHomepage?: boolean) => {
 
 export const onChangeCat = (e: { parameters: { text: any; isHomepage: string } }) => {
   console.log(e)
-  var text = e.parameters.text
-  var isHomepage = e.parameters.isHomepage === "true"
-  var card = createCatCard(text, isHomepage)
-  var navigation = CardService.newNavigation().updateCard(card)
-  var actionResponse = CardService.newActionResponseBuilder().setNavigation(navigation)
+  const text = e.parameters.text
+  const isHomepage = e.parameters.isHomepage === "true"
+  const card = createCatCard(text, isHomepage)
+  const navigation = CardService.newNavigation().updateCard(card)
+  const actionResponse = CardService.newActionResponseBuilder().setNavigation(navigation)
   return actionResponse.build()
 }
 
