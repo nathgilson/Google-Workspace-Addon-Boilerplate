@@ -1,9 +1,8 @@
-export const createCatCard = (text: string, isHomepage: boolean) => {
+export const createCatCard = (text: string, isHomepage?: boolean) => {
   // Explicitly set the value of isHomepage as false if null or undefined.
   if (!isHomepage) {
     isHomepage = false
   }
-
   var now = new Date()
   // Replace formward slashes in the text, as they break the CataaS API.
   var caption = text.replace(/\//g, " ")
@@ -29,7 +28,6 @@ export const createCatCard = (text: string, isHomepage: boolean) => {
   )
   var section = CardService.newCardSection().addWidget(image).addWidget(buttonSet)
   var card = CardService.newCardBuilder().addSection(section).setFixedFooter(footer)
-
   if (!isHomepage) {
     var peekHeader = CardService.newCardHeader()
       .setTitle("Contextual Cat")

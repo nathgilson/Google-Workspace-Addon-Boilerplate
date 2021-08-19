@@ -58,7 +58,12 @@
     "https://www.googleapis.com/auth/gmail.addons.current.message.readonly",
     "https://www.googleapis.com/auth/gmail.addons.execute",
 
-    "https://www.googleapis.com/auth/script.container.ui",
+    "https://www.googleapis.com/auth/calendar.addons.execute",
+    "https://www.googleapis.com/auth/calendar.readonly",
+
+    "https://www.googleapis.com/auth/drive.addons.metadata.readonly",
+
+    "https://www.googleapis.com/auth/script.locale",
     "https://www.googleapis.com/auth/script.external_request",
     "https://www.googleapis.com/auth/script.scriptapp",
     "https://www.googleapis.com/auth/userinfo.email"
