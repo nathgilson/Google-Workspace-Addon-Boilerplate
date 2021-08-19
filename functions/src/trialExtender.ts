@@ -1,4 +1,3 @@
-/* eslint-disable import/first */
 import { firestore } from "../utils/firebase"
 
 export default (app) => {

@@ -10,11 +10,13 @@ import trialExtender from "./trialExtender"
 /*********************************
  *    🤖 CALLABLE FUNCTIONS
  ********************************/
+// 🔼 Callable functions can be called only by firebase (https://firebase.google.com/docs/functions/callable#web-v9)
 exports.trialExtender = functions.https.onCall(trialExtender)
 
 /*********************************
  *            🤖 API
  ********************************/
+// 🔼 Express app can be called with an HTTP request https://firebase.google.com/docs/functions/http-events
 const app = express()
 const corsConfig = cors({ origin: true })
 // 1️⃣ set request handler:
