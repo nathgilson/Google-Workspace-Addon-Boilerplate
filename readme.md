@@ -37,7 +37,7 @@
 
 [Google Apps Script](https://developers.google.com/apps-script/overview) is Google's Javascript-based development platform for building applications and add-ons for Google Sheets, Docs, Forms and other Google Apps.
 
-This repo is a boilerplate project that uses the same development tools that you use for building traditional websites (Node, TypeScript, ES6, etc), all inside Google Apps Script projects.
+This repo is a boilerplate project that uses the same development tools that you use for building traditional web apps (ES6, TypeScript, Node, Firebase, etc), all inside Google Apps Script projects.
 
 See below how to get started!
 
