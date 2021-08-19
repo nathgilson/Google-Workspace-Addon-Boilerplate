@@ -1,7 +1,6 @@
 import express from "express"
 import { firestore } from "../utils/firebase"
 import stripe from "../utils/stripe"
-import { reportError } from "../utils/stackDriverLogger"
 
 const router = express.Router()
 
@@ -16,11 +15,6 @@ router.post("/", (req: any, res: any) => {
     // check stripe event signature
     event = stripe.webhooks.constructEvent(req.rawBody, req.headers["stripe-signature"], CONFIG.stripe.webhookSecret)
   } catch (error) {
-    //   reportError(
-    //     error,
-    //     { request: req, details: 'stripe-signature check error' },
-    //     req
-    //   )
     console.error(error)
     return res.status(400).send({ error })
   }
