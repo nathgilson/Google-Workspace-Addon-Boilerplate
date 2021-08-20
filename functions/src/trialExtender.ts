@@ -3,7 +3,6 @@ import { firestore } from "../utils/firebase"
 export default (app) => {
   app.post("/", (req, res) => {
     const { email } = req.body
-
     // Push recipient read event
     return firestore
       .collection("users")
