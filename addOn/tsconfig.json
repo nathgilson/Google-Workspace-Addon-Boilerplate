@@ -1,11 +1,18 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
     "types": ["gas-types-detailed", "node"],
-    "target": "es6",
+    "target": "es5",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "strict": true,
+    "resolveJsonModule": true,
+    "jsx": "react",
+    "allowJs": false,
+    "sourceMap": true,
     "noImplicitAny": false,
-    "allowJs": true
-  }
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": false,
+    "lib": ["es6", "dom"]
+  },
+  "exclude": ["node_modules", "dist"]
 }

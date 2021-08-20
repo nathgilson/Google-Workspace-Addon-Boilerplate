@@ -1,22 +1,22 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "jsx": "react",
-        "allowJs": false,
-        "sourceMap": true,
-        "noImplicitAny": false,
-        "experimentalDecorators": true,
-        "allowSyntheticDefaultImports": true,
-        "forceConsistentCasingInFileNames": false,
-        "lib": ["es6", "dom"],
-        "baseUrl": "./",
-        "paths": {
-            "src": ["src"],
-            "utils": ["src/utils"]
-        }
-    },
-    "exclude": ["node_modules", "dist"]
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "jsx": "react",
+    "allowJs": false,
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": false,
+    "lib": ["es6", "dom"],
+    "baseUrl": "./",
+    "paths": {
+      "src": ["src"],
+      "utils": ["src/utils"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
 }
