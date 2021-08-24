@@ -7,21 +7,17 @@ import hashRouter from "./hashRouter"
 import subscriptionWebhook from "./subscriptionWebhook"
 import trialExtender from "./trialExtender"
 
-/*********************************
- *    🤖 CALLABLE FUNCTIONS
- ********************************/
-// 🔼 Callable functions can be called only by firebase (https://firebase.google.com/docs/functions/callable#web-v9)
-exports.trialExtender = functions.https.onCall(trialExtender)
+require("firebase-functions/lib/logger/compat") // Prettify logs in firebase
 
-/*********************************
- *            🤖 API
- ********************************/
+/*************************************************
+ *                   🤖 API
+ ************************************************/
 // 🔼 Express app can be called with an HTTP request https://firebase.google.com/docs/functions/http-events
 const app = express()
 const corsConfig = cors({ origin: true })
 // 1️⃣ set request handler:
 app.use(corsConfig)
-// 2️⃣ set the app controllers:
+// 2️⃣ set the app controllers: [EDIT HERE ✍🏻]
 app.use("/auth", hashRouter)
 app.use("/subscriptionWebhook", subscriptionWebhook)
 // 3️⃣ set error handler:
@@ -31,4 +27,10 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: err.message || "An unknown error occurred." })
 })
 // 4️⃣ export:
-exports.api = functions.https.onRequest(app) // api
+exports.api = functions.https.onRequest(app)
+
+/*************************************************
+ *  🤖 CALLABLE FUNCTIONS FOR INTERNAL REQUESTS
+ ************************************************/
+// 🔼 Callable functions can be called only by firebase (https://firebase.google.com/docs/functions/callable#web-v9)
+exports.trialExtender = functions.https.onCall(trialExtender)
