@@ -1,4 +1,6 @@
 {
+  "env": "development",
+
   "firebaseSecret": {
     "type": "service_account",
     "project_id": "appname",

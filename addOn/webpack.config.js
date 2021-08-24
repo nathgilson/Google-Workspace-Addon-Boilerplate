@@ -7,12 +7,12 @@ const webpack = require("webpack")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const GasPlugin = require("gas-webpack-plugin")
 const TerserPlugin = require("terser-webpack-plugin")
+const ConfigWebpackPlugin = require("config-webpack")
 
 /*********************************
  *    set up environment variables
  ********************************/
 const dotenv = require("dotenv").config()
-
 const parsed = dotenv.error ? {} : dotenv.parsed
 const envVars = parsed || {}
 const PORT = envVars.PORT || 3000
@@ -155,6 +155,7 @@ const serverConfig = {
     ]
   },
   plugins: [
+    new ConfigWebpackPlugin(),
     new webpack.DefinePlugin({
       "process.env": JSON.stringify(envVars),
       "process.env.NODE_ENV": JSON.stringify(isProd ? "production" : "development")

@@ -1,8 +1,6 @@
 export const createCatCard = (text: string, isHomepage?: boolean) => {
   // Explicitly set the value of isHomepage as false if null or undefined.
-  if (!isHomepage) {
-    isHomepage = false
-  }
+  if (!isHomepage) isHomepage = false
   const now = new Date()
   // Replace formward slashes in the text, as they break the CataaS API.
   const caption = text.replace(/\//g, " ")
