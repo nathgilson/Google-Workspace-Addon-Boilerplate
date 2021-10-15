@@ -1,10 +1,35 @@
-node_modules/
+# clasp files
+.clasp*
+creds.json
+
+# npm
+node_modules
+
+# vs code settings
+.vscode
+
+# caches
+*.cache
+
+# clasp files
+# .clasp.json
+# creds.json
+
+# certs
+*.pem
+certs/
+
+# build
+**/dist/
 dist/
-.cache
-.vscode/
-yarn-error.log
+
+# mac
 .DS_Store
-.firebase 
+
+# misc
+.cache
+yarn-error.log
+.firebase
 .well-known/
 *.log
 *.lock
