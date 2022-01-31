@@ -14,9 +14,6 @@ const ConfigWebpackPlugin = require("config-webpack")
 const dotenv = require("dotenv").config()
 const parsed = dotenv.error ? {} : dotenv.parsed
 const envVars = parsed || {}
-const PORT = envVars.PORT || 3000
-envVars.NODE_ENV = process.env.NODE_ENV
-envVars.PORT = PORT
 
 /*********************************
  *    define entrypoints
@@ -60,7 +57,6 @@ const sharedClientAndServerConfig = {
 const serverConfig = {
   ...sharedClientAndServerConfig,
   name: "SERVER",
-  // server config can't use 'development' mode https://github.com/fossamagna/gas-webpack-plugin/issues/135
   mode: "production",
   entry: serverEntry,
   output: {
@@ -75,7 +71,7 @@ const serverConfig = {
     rules: [
       // typescript config
       {
-        test: /\.tsx?$/,
+        test: /\.ts?$/,
         exclude: /node_modules/,
         use: [
           {
