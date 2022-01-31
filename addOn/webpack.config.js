@@ -19,8 +19,6 @@ const PORT = envVars.PORT || 3000
 envVars.NODE_ENV = process.env.NODE_ENV
 envVars.PORT = PORT
 
-const isProd = process.env.NODE_ENV === "production"
-
 /*********************************
  *    define entrypoints
  ********************************/
@@ -95,9 +93,8 @@ if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
 const serverConfig = {
   ...sharedClientAndServerConfig,
   name: "SERVER",
-  // server config can't use 'development' mode
-  // https://github.com/fossamagna/gas-webpack-plugin/issues/135
-  mode: isProd ? "production" : "none",
+  // server config can't use 'development' mode https://github.com/fossamagna/gas-webpack-plugin/issues/135
+  mode: "production",
   entry: serverEntry,
   output: {
     filename: "code.js",
@@ -158,7 +155,7 @@ const serverConfig = {
     new ConfigWebpackPlugin(),
     new webpack.DefinePlugin({
       "process.env": JSON.stringify(envVars),
-      "process.env.NODE_ENV": JSON.stringify(isProd ? "production" : "development")
+      "process.env.NODE_ENV": JSON.stringify("production")
     }),
     new GasPlugin()
   ]
@@ -168,7 +165,7 @@ module.exports = [
   // 1. Copy appsscript.json to destination,
   // 2. Set up webpack dev server during development
   // Note: devServer settings are only read in the first element when module.exports is an array
-  { ...copyFilesConfig, ...(isProd ? {} : { devServer }) },
+  copyFilesConfig,
   // 3. Create the server bundle
   serverConfig
 ]

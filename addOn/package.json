@@ -1,14 +1,13 @@
 {
   "name": "Google-Workspace-Addon-Boilerplate",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Google Apps Script Boilerplate",
   "scripts": {
     "test": "test",
     "login": "clasp login",
     "setup": "rm -f .clasp.json && clasp create --type standalone --title 'My Google Workspace Addon' --rootDir ./dist",
     "setup:use-id": "clasp setting rootDir dist && clasp setting scriptId",
-    "build:dev": "NODE_ENV=development webpack",
-    "build": "NODE_ENV=production webpack",
+    "build": "webpack",
     "deploy:dev": "rm -rf dist && npm run build:dev && npx clasp push",
     "deploy": "rm -rf dist && npm run build && npx clasp push"
   },
@@ -18,7 +17,6 @@
     "npm": ">=6.0.0"
   },
   "dependencies": {
-    "@types/google-apps-script": "^1.0.19",
     "axios": "^0.21.1",
     "eslint-plugin-import": "^2.22.1",
     "firestore-parser": "^0.9.0",
@@ -38,6 +36,7 @@
     "@types/node": "^14.14.21",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
+    "@types/google-apps-script": "^1.0.41",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-add-module-exports": "^1.0.2",
@@ -64,7 +63,6 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "gas-lib": "^2.0.3",
-    "gas-types-detailed": "^1.0.0",
     "gas-webpack-plugin": "^1.0.4",
     "google-apps-script-webpack-dev-server": "^1.0.0",
     "module-to-cdn": "^3.1.5",
@@ -75,8 +73,5 @@
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
-  },
-  "globals": {
-    "CONFIG": true
   }
 }

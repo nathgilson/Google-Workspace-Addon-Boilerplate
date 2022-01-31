@@ -1,6 +1,7 @@
 declare const FirestoreApp: any
+import config from "../config"
 
-const { client_email, private_key, project_id } = CONFIG.firebaseSecret
+const { client_email, private_key, project_id } = config.firebaseSecret
 const firestore = FirestoreApp.getFirestore(client_email, private_key, project_id)
 const getUserEmail = (): any => Session.getEffectiveUser().getEmail() // or Session.getActiveUser()
 const timestamp = Date.now()

@@ -2,8 +2,7 @@
   "root": true,
   "parser": "@typescript-eslint/parser",
   "extends": [
-    "airbnb",
-    "eslint-config-prettier",
+    "airbnb", 
     "eslint:recommended",
     "prettier",
     "plugin:@typescript-eslint/recommended",
@@ -25,7 +24,6 @@
     "no-increment-decrement": false,
     "no-implicit-dependencies": false,
     "ordered-imports": false,
-
     "semi": "off",
     "no-use-before-define": "off",
     "comma-dangle": "off",
@@ -56,10 +54,7 @@
     "@typescript-eslint/indent": [2, 2],
     "@typescript-eslint/no-use-before-define": ["off"],
     "eslintjsx-a11y/click-events-have-key-events": "off"
-  },
-  "globals": {
-    "CONFIG": true
-  },
+  }, 
   "env": {
     "googleappsscript/googleappsscript": true
   }

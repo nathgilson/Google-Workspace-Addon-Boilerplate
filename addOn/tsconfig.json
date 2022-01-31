@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["gas-types-detailed", "node"],
+    "types": ["google-apps-script", "node"],
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",

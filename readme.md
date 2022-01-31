@@ -11,7 +11,7 @@
 [Google Workspace add-ons](https://developers.google.com/workspace/add-ons/how-tos/building-gsuite-addons) are the extensions that can be found in the side panel of most Google apps (Gmail, Google Drive, Sheets, Docs, Slides, etc), unlike the more complexe [Editor add-ons](https://developers.google.com/workspace/add-ons/how-tos/building-editor-addons) that can be found in the "Add-ons" tab of Google Sheets, Docs and Slides.
 
 <p align="center">
-<img height="300px" src="https://developers.google.com/workspace/add-ons/images/gsuite-addons-cats.png">
+<img height="300px" src="https://developers.google.com/apps-script/add-ons/images/workspace-addons-cats.png">
 </p>
 
 ---
@@ -176,5 +176,9 @@ All available methods from the Google Apps Script API are shown with full defini
 ### Card builder
 
 The online [Card builder](https://gw-card-builder.web.app/) can help you prototype your app's interface.
+
+### Troubleshooting
+
+->
 
 <br/>

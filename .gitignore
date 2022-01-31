@@ -11,10 +11,6 @@ node_modules
 # caches
 *.cache
 
-# clasp files
-# .clasp.json
-# creds.json
-
 # certs
 *.pem
 certs/
