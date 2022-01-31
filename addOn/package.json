@@ -3,12 +3,10 @@
   "version": "2.1.0",
   "description": "Google Apps Script Boilerplate",
   "scripts": {
-    "test": "test",
     "login": "clasp login",
-    "setup": "rm -f .clasp.json && clasp create --type standalone --title 'My Google Workspace Addon' --rootDir ./dist",
-    "setup:use-id": "clasp setting rootDir dist && clasp setting scriptId",
+    "setup": "rm -rf .clasp.json && clasp create --type standalone --title 'My Google Workspace Addon' && clasp setting rootDir ./dist",
+    "setup:use-id": "clasp setting scriptId",
     "build": "webpack",
-    "deploy:dev": "rm -rf dist && npm run build:dev && npx clasp push",
     "deploy": "rm -rf dist && npm run build && npx clasp push"
   },
   "author": "nathgilson",
