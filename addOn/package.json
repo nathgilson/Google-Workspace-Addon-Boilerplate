@@ -5,7 +5,6 @@
   "scripts": {
     "login": "clasp login",
     "setup": "rm -rf .clasp.json && clasp create --type standalone --title 'My Google Workspace Addon' && clasp setting rootDir ./dist",
-    "setup:use-id": "clasp setting scriptId",
     "build": "webpack",
     "deploy": "rm -rf dist && npm run build && npx clasp push"
   },

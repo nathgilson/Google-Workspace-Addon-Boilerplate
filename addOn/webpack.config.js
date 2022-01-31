@@ -2,7 +2,6 @@
  *    import webpack plugins
  ********************************/
 const path = require("path")
-const fs = require("fs")
 const webpack = require("webpack")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const GasPlugin = require("gas-webpack-plugin")
@@ -24,22 +23,14 @@ envVars.PORT = PORT
  ********************************/
 // our destination directory
 const destination = path.resolve(__dirname, "dist")
-
 // define server paths
 const serverEntry = "./src/app/index.ts"
-
 // define appsscript.json file path
 const copyAppscriptEntry = "./appsscript.json"
-
-// define certificate locations
-// see "npm run setup:https" script in package.json
-const keyPath = path.resolve(__dirname, "./certs/key.pem")
-const certPath = path.resolve(__dirname, "./certs/cert.pem")
 
 /*********************************
  *    Declare settings
  ********************************/
-
 // webpack settings for copying files to the destination folder
 const copyFilesConfig = {
   name: "COPY FILES - appsscript.json",
@@ -63,30 +54,6 @@ const copyFilesConfig = {
 // webpack settings used by both client and server
 const sharedClientAndServerConfig = {
   context: __dirname
-}
-
-const gasWebpackDevServerPath = require.resolve("google-apps-script-webpack-dev-server")
-
-// webpack settings for devServer https://webpack.js.org/configuration/dev-server/
-const devServer = {
-  port: PORT,
-  https: true,
-  // run our own route to serve the package google-apps-script-webpack-dev-server
-  before: (app) => {
-    // this '/gas/' path needs to match the path loaded in the iframe in dev/index.js
-    app.get("/gas/*", (req, res) => {
-      res.setHeader("Content-Type", "text/html")
-      fs.createReadStream(gasWebpackDevServerPath).pipe(res)
-    })
-  }
-}
-
-if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
-  // use key and cert settings only if they are found
-  devServer.https = {
-    key: fs.readFileSync(keyPath),
-    cert: fs.readFileSync(certPath)
-  }
 }
 
 // webpack settings used by the server-side code
