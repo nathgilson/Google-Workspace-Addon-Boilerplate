@@ -5,10 +5,8 @@ import * as db from "./db"
 
 declare const global: any
 
-// Init add-on when google app opens:
-global.onOpen = (e: any) => common.createCatCard("good morning", true)
-
 // COMMON
+global.onOpen = (e: any) => common.createCatCard("good morning", true)
 global.createCatCard = common.createCatCard
 global.onChangeCat = common.onChangeCat
 global.truncate = common.truncate

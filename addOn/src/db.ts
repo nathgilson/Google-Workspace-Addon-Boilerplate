@@ -1,11 +1,11 @@
+import config from "./config"
+
 declare const FirestoreApp: any
-import config from "../config"
 
 const { client_email, private_key, project_id } = config.firebaseSecret
 const firestore = FirestoreApp.getFirestore(client_email, private_key, project_id)
 const getUserEmail = (): any => Session.getEffectiveUser().getEmail() // or Session.getActiveUser()
 const timestamp = Date.now()
-const domain = getUserEmail()?.split("@")[1] || ""
 
 export const fetchUserData = (): any => {
   let userDocument = null
@@ -13,7 +13,7 @@ export const fetchUserData = (): any => {
   try {
     userDocument = firestore.getDocument(`users/${getUserEmail()}`)?.obj
   } catch (error) {
-    console.warn(`>> New user: ${getUserEmail() || "unknown"}:`)
+    console.error(`>> No user found, creating one. \n>>Email: ${getUserEmail()} \n>>Error: ${error}`)
   }
   if (userDocument) return userDocument
   // 2️⃣ IF DOESNT EXIST => CREATE NEW USER IN DB
@@ -33,4 +33,14 @@ export const fetchUserData = (): any => {
   if (userDocument) return userDocument
   // 4️⃣ FAILSAFE
   return newUserObject
+}
+
+export const fetchTrackingData = (): any => {
+  const trackingData = firestore.getDocuments(`users/${getUserEmail()}/trackingData`).map((doc) => {
+    const { events } = doc.obj
+    const trackingPath = doc.path.split("/")
+    const trackingId = trackingPath[trackingPath.length - 1]
+    return { events, trackingId }
+  })
+  return trackingData || []
 }

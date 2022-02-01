@@ -1,4 +1,4 @@
-// User properties & script properties are local storage for Gscript add-ons:
+// User properties & script properties are the equivalent of the local storage for Gscript add-ons:
 
 // USER PROPERTY:
 export const setUserProperty = (uid: string, property: any) =>
@@ -17,7 +17,7 @@ export const deleteUserProperties = () => {
   return PropertiesService?.getUserProperties()?.deleteAllProperties()
 }
 
-// SCRIPT PROPS
+// SCRIPT PROPERTIES:
 export const setScriptProperty = (properties: any) =>
   PropertiesService?.getScriptProperties()?.setProperties(properties)
 export const deleteScriptProperties = () => {
