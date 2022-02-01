@@ -33,7 +33,6 @@ export const createCatCard = (text: string, isHomepage?: boolean) => {
       .setSubtitle(text)
     card.setPeekCardHeader(peekHeader)
   }
-
   return card.build()
 }
 
@@ -45,12 +44,4 @@ export const onChangeCat = (e: { parameters: { text: any; isHomepage: string } }
   const navigation = CardService.newNavigation().updateCard(card)
   const actionResponse = CardService.newActionResponseBuilder().setNavigation(navigation)
   return actionResponse.build()
-}
-
-export const truncate = (message: string) => {
-  if (message.length > 40) {
-    message = message.slice(0, 40)
-    message = message.slice(0, message.lastIndexOf(" ")) + "..."
-  }
-  return message
 }

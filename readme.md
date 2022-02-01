@@ -177,8 +177,4 @@ All available methods from the Google Apps Script API are shown with full defini
 
 The online [Card builder](https://gw-card-builder.web.app/) can help you prototype your app's interface.
 
-### Troubleshooting
-
-->
-
 <br/>

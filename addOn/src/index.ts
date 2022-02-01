@@ -9,7 +9,6 @@ declare const global: any
 global.onOpen = (e: any) => common.createCatCard("good morning", true)
 global.createCatCard = common.createCatCard
 global.onChangeCat = common.onChangeCat
-global.truncate = common.truncate
 
 // GMAIL
 global.onGmailMessage = gmail.onGmailMessage

@@ -1,4 +1,4 @@
-import { createCatCard, truncate } from "./common"
+import { createCatCard } from "./common"
 
 export const onGmailMessage = (e) => {
   console.log(e)
@@ -13,8 +13,6 @@ export const onGmailMessage = (e) => {
   let subject = message.getThread().getFirstMessageSubject()
   // Remove labels and prefixes.
   subject = subject.replace(/^([rR][eE]|[fF][wW][dD])\:\s*/, "").replace(/^\[.*?\]\s*/, "")
-  // If neccessary, truncate the subject to fit in the image.
-  subject = truncate(subject)
   return createCatCard(subject)
 }
 

@@ -5,7 +5,6 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "jsx": "react",
     "allowJs": false,
     "sourceMap": true,
     "noImplicitAny": false,
