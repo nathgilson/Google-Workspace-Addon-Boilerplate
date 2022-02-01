@@ -21,7 +21,7 @@ const envVars = parsed || {}
 // our destination directory
 const destination = path.resolve(__dirname, "dist")
 // define server paths
-const serverEntry = "./src/app/index.ts"
+const serverEntry = "./src/index.ts"
 // define appsscript.json file path
 const copyAppscriptEntry = "./appsscript.json"
 
