@@ -5,8 +5,10 @@
   "scripts": {
     "login": "clasp login",
     "setup": "rm -rf .clasp.json && clasp create --type standalone --title 'My Google Workspace Addon' && clasp setting rootDir ./dist",
+    "windows:setup": "del .clasp.json && clasp create --type standalone --title 'My Google Workspace Addon' && clasp setting rootDir ./dist",
     "build": "webpack",
-    "deploy": "rm -rf dist && npm run build && npx clasp push"
+    "deploy": "rm -rf dist && npm run build && npx clasp push",
+    "windows:deploy": "del dist && npm run build && npx clasp push"
   },
   "author": "nathgilson",
   "engines": {
