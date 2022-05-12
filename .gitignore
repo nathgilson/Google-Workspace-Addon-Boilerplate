@@ -29,3 +29,5 @@ yarn-error.log
 .well-known/
 *.log
 *.lock
+addOn/package-lock.json
+package-lock.json

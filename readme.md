@@ -66,6 +66,8 @@ cd addOn
 npm install
 ```
 
+If using a newer version of Node, may need to `--legacy-peer-deps`
+
 <p align="center">
 <img width="500px" src="https://i.imgur.com/EGSsCqO.gif">
 </p>
